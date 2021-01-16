@@ -1,0 +1,75 @@
+Transform: AWS::Serverless-2016-10-31
+Description: A Crud using Node and SAM Templates
+Globals:
+  Function:
+    Runtime: nodejs12.x
+    MemorySize: 128
+    Timeout: 3
+    Environment:
+        Variables:
+          SAMPLE_TABLE: !Ref SampleTable
+
+Resources:
+  getAllItemsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/get-all-items.getAllItemsHandler
+      Description: A Function to get all items of a DB
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SampleTable     
+      Events:
+        Api:
+          Type: Api
+          Properties:
+              Path: /
+              Method: GET
+  getItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/get-item.getItemHandler
+      Description: A Function to get a single items of a DB
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SampleTable     
+      Events:
+        Api:
+          Type: Api
+          Properties:
+              Path: /{id}
+              Method: GET
+
+  deleteItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/delete-item.deleteItemHandler
+      Description: A Function to get all items of a DB
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SampleTable     
+      Events:
+        Api:
+          Type: Api
+          Properties:
+              Path: /{id}
+              Method: DELETE
+  
+  SampleTable:
+      Type: AWS::Serverless::SimpleTable
+      Properties:
+        PrimaryKey:
+          Name: id
+          Type: String
+        ProvisionedThroughput:
+          ReadCapacityUnits: 2
+          WriteCapacityUnits: 2
+
+
+
+        
+          
+
+
+
+
+
