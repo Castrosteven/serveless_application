@@ -1,8 +1,3 @@
----
-
-
----
-
 <h1 id="aws-serverless-application-model-node-js--vue-3-ts">AWS Serverless Application Model Node JS &amp; Vue 3 TS</h1>
 <p>This application is exactly what the title suggests, is a Entire Crud Application. A Todo Application that uses Vue JS 3 on the client side to build a Single Page Web Application, with a completely server-less back-end architecture.</p>
 <h1 id="client-application">Client Application</h1>
